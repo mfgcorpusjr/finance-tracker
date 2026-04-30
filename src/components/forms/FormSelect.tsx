@@ -59,7 +59,7 @@ export default function FormSelect<T extends FieldValues>({
           </Select>
 
           {fieldState.invalid && (
-            <FieldError errors={[fieldState.error]} className="-mt-1" />
+            <FieldError errors={[fieldState.error]} className="-mt-1 text-xs" />
           )}
         </Field>
       )}

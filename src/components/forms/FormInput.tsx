@@ -39,7 +39,7 @@ export default function FormInput<T extends FieldValues>({
           />
 
           {fieldState.invalid && (
-            <FieldError errors={[fieldState.error]} className="-mt-1" />
+            <FieldError errors={[fieldState.error]} className="-mt-1 text-xs" />
           )}
         </Field>
       )}

@@ -35,7 +35,7 @@ export default function FinanceForm() {
 
   return (
     <form
-      className="flex items-start gap-4"
+      className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
       onSubmit={form.handleSubmit(handleAddFinance)}
     >
       <FormInput
