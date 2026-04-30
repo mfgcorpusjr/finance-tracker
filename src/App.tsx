@@ -1,6 +1,7 @@
 import Container from "@/components/Container";
 import Balance from "@/features/finance/components/Balance";
 import FinanceForm from "@/features/finance/components/FinanceForm";
+import FinanceList from "@/features/finance/components/FinanceList";
 
 export default function App() {
   return (
@@ -8,6 +9,8 @@ export default function App() {
       <Balance />
 
       <FinanceForm />
+
+      <FinanceList />
     </Container>
   );
 }

@@ -5,4 +5,5 @@ export type Finance = {
   description: string;
   amount: number;
   type: FinanceType;
+  date: Date;
 };

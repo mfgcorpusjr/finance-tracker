@@ -20,7 +20,12 @@ export default function FinanceProvider({ children }: Props) {
 
   const addFinance = (formData: AddFinanceFormData) => {
     setFinances((currentFinances) => [
-      { ...formData, type: formData.type as FinanceType, id: Date.now() },
+      {
+        ...formData,
+        type: formData.type as FinanceType,
+        id: Date.now(),
+        date: new Date(),
+      },
       ...currentFinances,
     ]);
   };
