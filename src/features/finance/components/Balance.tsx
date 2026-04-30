@@ -1,19 +1,19 @@
 import clsx from "clsx";
 
-type Props = {
-  amount: number;
-};
+import { useFinanceContext } from "@/features/finance/providers/FinanceProvider";
 
-export default function Balance({ amount }: Props) {
+export default function Balance() {
+  const { balance } = useFinanceContext();
+
   return (
     <h3
       className={clsx("text-5xl text-black font-black", {
-        "text-green-700": amount > 0,
-        "text-red-700": amount < 0,
+        "text-green-700": balance > 0,
+        "text-red-700": balance < 0,
       })}
     >
-      {amount > 0 && "+"}
-      {amount}
+      {balance > 0 && "+"}
+      {balance}
     </h3>
   );
 }
