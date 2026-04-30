@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 import type { Finance, FinanceType } from "@/features/finance/utils/types";
 import { type AddFinanceFormData } from "@/features/finance/utils/schemas";
@@ -16,7 +16,14 @@ type Props = {
 };
 
 export default function FinanceProvider({ children }: Props) {
-  const [finances, setFinances] = useState<Finance[]>([]);
+  const [finances, setFinances] = useState<Finance[]>(() => {
+    const storedFinances = localStorage.getItem("finances");
+    return storedFinances ? JSON.parse(storedFinances) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("finances", JSON.stringify(finances));
+  }, [finances]);
 
   const addFinance = (formData: AddFinanceFormData) => {
     setFinances((currentFinances) => [
