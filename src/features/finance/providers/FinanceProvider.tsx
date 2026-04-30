@@ -4,7 +4,8 @@ import { type Finance } from "@/features/finance/utils/types";
 
 type FinanceContext = {
   finances: Finance[];
-  balance: 0;
+  addFinance: (formData: Omit<Finance, "id">) => void;
+  balance: number;
 };
 
 const FinanceContext = createContext<FinanceContext | undefined>(undefined);
@@ -16,10 +17,17 @@ type Props = {
 export default function FinanceProvider({ children }: Props) {
   const [finances, setFinances] = useState<Finance[]>([]);
 
-  const balance = 0;
+  const addFinance = (formData: Omit<Finance, "id">) => {
+    setFinances((currentFinances) => [
+      { ...formData, id: Date.now() },
+      ...currentFinances,
+    ]);
+  };
+
+  const balance = finances.reduce((acc, item) => acc + item.amount, 0);
 
   return (
-    <FinanceContext.Provider value={{ finances, balance }}>
+    <FinanceContext.Provider value={{ finances, addFinance, balance }}>
       {children}
     </FinanceContext.Provider>
   );

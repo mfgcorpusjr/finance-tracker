@@ -1,36 +1,29 @@
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { LucidePlus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import FormInput from "@/components/forms/FormInput";
 import FormSelect from "@/components/forms/FormSelect";
 
+import useAddFinance from "@/features/finance/hooks/useAddFinance";
+import type {
+  AddFinanceFormData,
+  FinanceType,
+} from "@/features/finance/utils/types";
 import { financeTypes } from "@/features/finance/utils/data";
 
-const formSchema = z.object({
-  description: z.string().min(2, "Description must be at least 2 characters"),
-  amount: z.coerce
-    .number<number>({ error: "Amount is required" })
-    .min(1, { error: "Amount must be at least 1" }),
-  type: z.enum(financeTypes, { error: "Type is required" }),
-});
-
-type FormData = z.infer<typeof formSchema>;
-
 export default function FinanceForm() {
-  const form = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      description: "",
-      amount: undefined,
-      type: "Income",
-    },
-  });
+  const { submit, form } = useAddFinance();
 
-  const handleAddFinance = (formData: FormData) => {
-    console.log(formData);
+  const handleAddFinance = (formData: AddFinanceFormData) => {
+    const type = formData.type as FinanceType;
+
+    submit({
+      description: formData.description,
+      amount: type === "Income" ? formData.amount : -formData.amount,
+      type,
+    });
+
+    form.reset();
   };
 
   return (
