@@ -13,7 +13,7 @@ export default function Balance() {
       })}
     >
       {balance > 0 && "+"}
-      {balance}
+      {balance.toFixed(2)}
     </h3>
   );
 }

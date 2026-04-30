@@ -2,11 +2,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useFinanceContext } from "@/features/finance/providers/FinanceProvider";
-import { type AddFinanceFormData } from "@/features/finance/utils/types";
-import { addFinanceSchema } from "@/features/finance/utils/schemas";
+import {
+  type AddFinanceFormData,
+  addFinanceSchema,
+} from "@/features/finance/utils/schemas";
 
 const useAddFinance = () => {
-  const { addFinance: submit } = useFinanceContext();
+  const { addFinance } = useFinanceContext();
 
   const form = useForm<AddFinanceFormData>({
     resolver: zodResolver(addFinanceSchema),
@@ -18,7 +20,7 @@ const useAddFinance = () => {
   });
 
   return {
-    submit,
+    addFinance,
     form,
   };
 };

@@ -1,10 +1,11 @@
 import { createContext, useContext, useState } from "react";
 
-import { type Finance } from "@/features/finance/utils/types";
+import type { Finance, FinanceType } from "@/features/finance/utils/types";
+import { type AddFinanceFormData } from "@/features/finance/utils/schemas";
 
 type FinanceContext = {
   finances: Finance[];
-  addFinance: (formData: Omit<Finance, "id">) => void;
+  addFinance: (formData: AddFinanceFormData) => void;
   balance: number;
 };
 
@@ -17,9 +18,9 @@ type Props = {
 export default function FinanceProvider({ children }: Props) {
   const [finances, setFinances] = useState<Finance[]>([]);
 
-  const addFinance = (formData: Omit<Finance, "id">) => {
+  const addFinance = (formData: AddFinanceFormData) => {
     setFinances((currentFinances) => [
-      { ...formData, id: Date.now() },
+      { ...formData, type: formData.type as FinanceType, id: Date.now() },
       ...currentFinances,
     ]);
   };

@@ -5,22 +5,16 @@ import FormInput from "@/components/forms/FormInput";
 import FormSelect from "@/components/forms/FormSelect";
 
 import useAddFinance from "@/features/finance/hooks/useAddFinance";
-import type {
-  AddFinanceFormData,
-  FinanceType,
-} from "@/features/finance/utils/types";
+import { type AddFinanceFormData } from "@/features/finance/utils/schemas";
 import { financeTypes } from "@/features/finance/utils/data";
 
 export default function FinanceForm() {
-  const { submit, form } = useAddFinance();
+  const { form, addFinance } = useAddFinance();
 
   const handleAddFinance = (formData: AddFinanceFormData) => {
-    const type = formData.type as FinanceType;
-
-    submit({
-      description: formData.description,
-      amount: type === "Income" ? formData.amount : -formData.amount,
-      type,
+    addFinance({
+      ...formData,
+      amount: formData.type === "Income" ? formData.amount : -formData.amount,
     });
 
     form.reset();

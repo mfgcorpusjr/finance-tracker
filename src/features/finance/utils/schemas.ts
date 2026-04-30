@@ -9,3 +9,5 @@ export const addFinanceSchema = z.object({
     .min(1, { error: "Amount must be at least 1" }),
   type: z.enum(financeTypes, { error: "Type is required" }),
 });
+
+export type AddFinanceFormData = z.infer<typeof addFinanceSchema>;
