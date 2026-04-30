@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { Card, CardContent } from "@/components/ui/card";
 
 import { type Finance } from "@/features/finance/utils/types";
+import { formatCurrency } from "@/features/finance/utils/helpers";
 
 type Props = {
   finance: Finance;
@@ -28,7 +29,7 @@ export default function FinanceListItem({ finance }: Props) {
           })}
         >
           {finance.type === "Income" && "+"}
-          {finance.amount.toFixed(2)}
+          {formatCurrency(finance.amount)}
         </p>
       </CardContent>
     </Card>

@@ -1,6 +1,7 @@
 import clsx from "clsx";
 
 import { useFinanceContext } from "@/features/finance/providers/FinanceProvider";
+import { formatCurrency } from "@/features/finance/utils/helpers";
 
 export default function Balance() {
   const { balance } = useFinanceContext();
@@ -13,7 +14,7 @@ export default function Balance() {
       })}
     >
       {balance > 0 && "+"}
-      {balance.toFixed(2)}
+      {formatCurrency(balance)}
     </h3>
   );
 }
