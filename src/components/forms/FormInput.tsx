@@ -28,12 +28,12 @@ export default function FormInput<T extends FieldValues>({
       control={control}
       render={({ field, fieldState }) => (
         <Field data-invalid={fieldState.invalid}>
-          {label && <FieldLabel htmlFor={name}>{label}</FieldLabel>}
+          {label && <FieldLabel htmlFor={field.name}>{label}</FieldLabel>}
 
           <Input
             {...rest}
             {...field}
-            id={name}
+            id={field.name}
             aria-invalid={fieldState.invalid}
             value={field.value ?? ""}
           />

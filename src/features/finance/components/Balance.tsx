@@ -13,8 +13,7 @@ export default function Balance() {
         "text-red-700": balance < 0,
       })}
     >
-      {balance > 0 && "+"}
-      {formatCurrency(balance)}
+      {`${balance > 0 ? "+" : ""}${formatCurrency(balance)}`}
     </h3>
   );
 }

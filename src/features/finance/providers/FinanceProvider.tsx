@@ -1,11 +1,12 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-import type { Finance, FinanceType } from "@/features/finance/utils/types";
-import { type AddFinanceFormData } from "@/features/finance/utils/schemas";
+import type { Finance } from "@/features/finance/utils/types";
+
+type addFinancePayload = Omit<Finance, "id" | "date">;
 
 type FinanceContext = {
   finances: Finance[];
-  addFinance: (formData: AddFinanceFormData) => void;
+  addFinance: (formData: addFinancePayload) => void;
   balance: number;
 };
 
@@ -25,11 +26,10 @@ export default function FinanceProvider({ children }: Props) {
     localStorage.setItem("finances", JSON.stringify(finances));
   }, [finances]);
 
-  const addFinance = (formData: AddFinanceFormData) => {
+  const addFinance = (formData: addFinancePayload) => {
     setFinances((currentFinances) => [
       {
         ...formData,
-        type: formData.type as FinanceType,
         id: Date.now(),
         date: new Date(),
       },

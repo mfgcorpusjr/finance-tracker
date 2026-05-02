@@ -6,15 +6,19 @@ import FormSelect from "@/components/forms/FormSelect";
 
 import useAddFinance from "@/features/finance/hooks/useAddFinance";
 import { type AddFinanceFormData } from "@/features/finance/utils/schemas";
+import { type FinanceType } from "@/features/finance/utils/types";
 import { financeTypes } from "@/features/finance/utils/data";
 
 export default function FinanceForm() {
   const { form, addFinance } = useAddFinance();
 
   const handleAddFinance = (formData: AddFinanceFormData) => {
+    const type = formData.type as FinanceType;
+
     addFinance({
-      ...formData,
-      amount: formData.type === "Income" ? formData.amount : -formData.amount,
+      description: formData.description,
+      amount: type === "Income" ? formData.amount : -formData.amount,
+      type,
     });
 
     form.reset();

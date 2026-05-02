@@ -36,18 +36,18 @@ export default function FormSelect<T extends FieldValues>({
       control={control}
       render={({ field, fieldState }) => (
         <Field data-invalid={fieldState.invalid}>
-          {label && <FieldLabel htmlFor={name}>{label}</FieldLabel>}
+          {label && <FieldLabel htmlFor={field.name}>{label}</FieldLabel>}
 
           <Select
             name={field.name}
             value={field.value}
             onValueChange={field.onChange}
           >
-            <SelectTrigger id={name} aria-invalid={fieldState.invalid}>
+            <SelectTrigger id={field.name} aria-invalid={fieldState.invalid}>
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
 
-            <SelectContent>
+            <SelectContent position="popper">
               <SelectGroup>
                 {items.map((item) => (
                   <SelectItem key={item.value} value={item.value}>
