@@ -1,5 +1,6 @@
 import { LucidePlus } from "lucide-react";
 
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import FormInput from "@/components/forms/FormInput";
 import FormSelect from "@/components/forms/FormSelect";
@@ -25,33 +26,37 @@ export default function FinanceForm() {
   };
 
   return (
-    <form
-      className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
-      onSubmit={form.handleSubmit(handleAddFinance)}
-    >
-      <FormInput
-        name="description"
-        control={form.control}
-        placeholder="Description"
-      />
+    <Card>
+      <CardContent>
+        <form
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4"
+          onSubmit={form.handleSubmit(handleAddFinance)}
+        >
+          <FormInput
+            name="description"
+            control={form.control}
+            placeholder="Description"
+          />
 
-      <FormInput
-        type="number"
-        name="amount"
-        control={form.control}
-        placeholder="Amount"
-      />
+          <FormInput
+            type="number"
+            name="amount"
+            control={form.control}
+            placeholder="Amount"
+          />
 
-      <FormSelect
-        name="type"
-        control={form.control}
-        placeholder="Type"
-        items={financeTypes.map((type) => ({ value: type, text: type }))}
-      />
+          <FormSelect
+            name="type"
+            control={form.control}
+            placeholder="Type"
+            items={financeTypes.map((type) => ({ value: type, text: type }))}
+          />
 
-      <Button>
-        <LucidePlus /> Submit
-      </Button>
-    </form>
+          <Button>
+            <LucidePlus /> Submit
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
 }
